@@ -9,6 +9,12 @@ const HomePage = lazy(() =>
   })),
 );
 
+const LoginPage = lazy(() =>
+  import("../pages/login-page").then((module) => ({
+    default: module.LoginPage,
+  })),
+);
+
 const withSuspense = (Page: ComponentType) => {
   return () => {
     return (
@@ -28,3 +34,4 @@ export const RootLayout = () => {
 };
 
 export const HomeRoute = withSuspense(HomePage);
+export const LoginRoute = withSuspense(LoginPage);
