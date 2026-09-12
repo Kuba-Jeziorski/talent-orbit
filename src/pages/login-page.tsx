@@ -1,3 +1,3 @@
 export const LoginPage = () => {
-  return <h1>Login page</h1>;
+  return <div className="w-full">Login</div>;
 };

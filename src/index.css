@@ -1,5 +1,55 @@
 @import "tailwindcss";
 
+@theme {
+  /* TEXT — text-primary, text-brand, … */
+  --color-primary: #f5f7fa;
+  --color-secondary: #9aa3b2;
+  --color-tertiary: #6b7380;
+  --color-muted: #585e68;
+  --color-brand: #fb8a18;
+  --color-link: #fb8a18;
+  --color-inverse: #0b1018;
+  --color-error: #f1573d;
+  --color-success: #3ecf8e;
+  --color-placeholder: #6b7380;
+
+  /* BACKGROUND — bg-page, bg-surface, … */
+  --background-color-page: #01050e;
+  --background-color-app: #020b14;
+  --background-color-sidebar: #030c15;
+  --background-color-surface: #0d1520;
+  --background-color-surface-elevated: #111a23;
+  --background-color-input: #0c1420;
+  --background-color-chrome: #151c24;
+  --background-color-nav-active: #121921;
+  --background-color-button-primary: #fb8a18;
+  --background-color-button-secondary: #0c1420;
+  --background-color-button-ghost: transparent;
+  --background-color-badge: #12110f;
+  --background-color-overlay: rgba(1, 5, 14, 0.72);
+
+  /* BORDER — border-subtle, border-default, … */
+  --border-color-subtle: #182028;
+  --border-color-default: #242d36;
+  --border-color-strong: #2c343c;
+  --border-color-brand: #fb8a18;
+  --border-color-error: #f1573d;
+
+  /* ACCENT — bg-accent-brand, text-accent-brand, … */
+  --color-accent-brand: #fb8a18;
+  --color-accent-brand-hot: #fc8006;
+  --color-accent-brand-soft: #e09544;
+  --color-accent-success: #3ecf8e;
+  --color-accent-error: #f1573d;
+
+  /* ICON — text-icon-primary, fill-icon-brand, … */
+  --color-icon-primary: #f5f7fa;
+  --color-icon-secondary: #9aa3b2;
+  --color-icon-brand: #fb8a18;
+  --color-icon-success: #3ecf8e;
+  --color-icon-on-brand: #0b1018;
+}
+
 * {
   box-sizing: border-box;
 }
