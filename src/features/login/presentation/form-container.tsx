@@ -1,5 +1,5 @@
-import { useState, type SubmitEvent } from "react";
-import { useLogin } from "../../../libs/utils/queries/use-login";
+import { useState, type FormEvent } from "react";
+import { useLogin } from "../api/use-login";
 
 export const FormContainer = () => {
   const [email, setEmail] = useState("");
@@ -7,7 +7,7 @@ export const FormContainer = () => {
 
   const { login, isPending } = useLogin();
 
-  const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!email || !password) {
@@ -32,7 +32,7 @@ export const FormContainer = () => {
         <label htmlFor="email">Email</label>
         <input
           id="email"
-          type="text"
+          type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={isPending}
@@ -40,7 +40,7 @@ export const FormContainer = () => {
         <label htmlFor="password">Password</label>
         <input
           id="password"
-          type="text"
+          type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           disabled={isPending}

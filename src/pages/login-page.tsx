@@ -1,10 +1,16 @@
-import { useState } from "react";
-import { cn } from "../libs/utils/css/css";
+import { lazy, Suspense, useState } from "react";
+import { cn } from "../libs/css/cn";
 import type { Step } from "../features/login/domain/model";
+import { Spinner } from "../libs/ui/spinner";
 import { LogoContainer } from "../features/login/presentation/logo-container";
 import { PrivacyContainer } from "../features/login/presentation/privacy-container";
-import { CookiesContainer } from "../features/login/presentation/cookies-container";
-import { FormContainer } from "../features/login/presentation/form-container";
+import { CookiesContainer } from "../features/cookies/presentation/cookies-container";
+
+const FormContainer = lazy(() =>
+  import("../features/login/presentation/form-container").then((module) => ({
+    default: module.FormContainer,
+  })),
+);
 
 export const LoginPage = () => {
   const [step, setStep] = useState<Step>("welcome");
@@ -27,7 +33,9 @@ export const LoginPage = () => {
         </div>
       ) : (
         <div className="w-full h-full max-w-375 mx-auto flex justify-center items-center">
-          <FormContainer />
+          <Suspense fallback={<Spinner />}>
+            <FormContainer />
+          </Suspense>
         </div>
       )}
     </div>
