@@ -5,6 +5,7 @@ export type LoginProps = {
   password: string;
 };
 
+// Thin wrapper around Supabase sign-in. Throws if credentials fail.
 export const login = async ({ email, password }: LoginProps) => {
   const { data, error } = await supabase.auth.signInWithPassword({
     email,

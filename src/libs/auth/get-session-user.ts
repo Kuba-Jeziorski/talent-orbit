@@ -1,5 +1,6 @@
 import { supabase } from "../supabase/client";
 
+// Reads the local Supabase session. Returns the user object or null.
 export const getSessionUser = async () => {
   const {
     data: { session },

@@ -8,6 +8,8 @@ type Props = {
   children: ReactNode;
 };
 
+// Mounts with the app (first visit and refresh). Keeps ["user"] in sync
+// for the whole session; does not decide login vs home.
 export const AuthListener = ({ children }: Props) => {
   const queryClient = useQueryClient();
   const [ready, setReady] = useState(false);
@@ -16,6 +18,8 @@ export const AuthListener = ({ children }: Props) => {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
+      // Same callback, many events. First is INITIAL_SESSION
+      // Later: SIGNED_IN, TOKEN_REFRESHED, SIGNED_OUT, …
       queryClient.setQueryData(USER_QUERY_KEY, session?.user ?? null);
       setReady(true);
     });
