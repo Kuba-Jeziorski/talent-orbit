@@ -1,7 +1,7 @@
 import { lazy, Suspense, type ComponentType } from "react";
 import { Outlet } from "react-router";
 import { Spinner } from "../libs/ui/spinner";
-import { Layout } from "../libs/layout";
+import { Layout } from "../libs/ui/layout";
 
 const HomePage = lazy(() =>
   import("../pages/home-page").then((module) => ({
