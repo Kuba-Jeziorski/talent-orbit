@@ -1,19 +1,16 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router";
+import { Navigate } from "react-router";
+import { useUser } from "../libs/utils/db/use-user";
 
 export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  // check if there is a user authenticated
-  // if no --> redirect to the /login page
-  // if yes --> return <>{children}</>
+  const { isAuthenticated, isLoading } = useUser();
 
-  const navigate = useNavigate();
-  const isAuth = false;
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-  useEffect(() => {
-    if (!isAuth) {
-      navigate("/login");
-    }
-  }, [isAuth, navigate]);
+  if (!isAuthenticated) {
+    <Navigate to="/login" />;
+  }
 
   return <div data-component="protected">{children}</div>;
 };

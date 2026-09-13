@@ -4,10 +4,7 @@ import type { Step } from "../features/login/domain/model";
 import { LogoContainer } from "../features/login/presentation/logo-container";
 import { PrivacyContainer } from "../features/login/presentation/privacy-container";
 import { CookiesContainer } from "../features/login/presentation/cookies-container";
-
-const FormContainer = () => {
-  return <h1>form</h1>;
-};
+import { FormContainer } from "../features/login/presentation/form-container";
 
 export const LoginPage = () => {
   const [step, setStep] = useState<Step>("welcome");
