@@ -21,9 +21,9 @@ export const PrivacyContainer = ({ setStep }: PrivacyContainerProps) => {
           </button>
         </div>
         <div className="flex items-center gap-2 mb-2">
-          <span className="flex-1 h-px bg-secondary/50"></span>
+          <span className="flex-1 h-px bg-secondary/50" />
           <p>or</p>
-          <span className="flex-1 h-px bg-secondary/50"></span>
+          <span className="flex-1 h-px bg-secondary/50" />
         </div>
         <a
           href="#"

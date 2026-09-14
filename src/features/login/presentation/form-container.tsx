@@ -1,14 +1,11 @@
 import { useState, type SubmitEvent } from "react";
 import { useLogin } from "../api/use-login";
-import {
-  Check,
-  CircleAlert,
-  Eye,
-  EyeClosed,
-  Mail,
-  ShieldCheck,
-} from "lucide-react";
+import { Check, Eye, EyeClosed, Mail, ShieldCheck } from "lucide-react";
 import { cn } from "../../../libs/css/cn";
+import { FormErrorMessage } from "./form-error-message";
+
+const fieldClassName =
+  "border border-default rounded-lg h-12 bg-transparent text-lg relative";
 
 export const FormContainer = () => {
   const [email, setEmail] = useState("");
@@ -25,39 +22,24 @@ export const FormContainer = () => {
     setPassword("");
     setEmailError(false);
     setPasswordError(false);
+    setPasswordVisible(false);
+    setKeepSignedIn(false);
   };
 
   const handleSubmit = (e: SubmitEvent) => {
     e.preventDefault();
 
-    if (!email) {
-      setEmailError(true);
-    } else {
-      setEmailError(false);
-    }
+    const hasEmail = Boolean(email);
+    const hasPassword = Boolean(password);
 
-    if (!password) {
-      setPasswordError(true);
-    } else {
-      setPasswordError(false);
-    }
+    setEmailError(!hasEmail);
+    setPasswordError(!hasPassword);
 
-    if (!email || !password) {
+    if (!hasEmail || !hasPassword) {
       return;
     }
 
-    login(
-      { email, password },
-      {
-        onSettled: () => {
-          handleReset();
-        },
-      },
-    );
-  };
-
-  const toggleVisible = () => {
-    setPasswordVisible((passwordVisible) => !passwordVisible);
+    login({ email, password }, { onSettled: handleReset });
   };
 
   return (
@@ -71,20 +53,20 @@ export const FormContainer = () => {
             id="email"
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              if (emailError) {
+                setEmailError(false);
+              }
+            }}
             disabled={isPending}
-            className="border border-default rounded-lg h-12 pl-12 pr-4 bg-transparent text-lg relative z-2"
+            className={cn(fieldClassName, "pl-12 pr-4 z-2")}
           />
           <div className="absolute z-1 top-10 left-3 w-6 h-6">
             <Mail className="w-full h-full object-contain stroke-2" />
           </div>
           {emailError && (
-            <div className="absolute -bottom-6 text-accent-error text-sm flex items-center gap-1">
-              <span className="text-inherit">
-                <CircleAlert size={16} />
-              </span>
-              Please enter your email
-            </div>
+            <FormErrorMessage>Please enter your email</FormErrorMessage>
           )}
         </div>
         <div className="flex flex-col w-full gap-1 mt-8 mb-10 relative">
@@ -93,16 +75,23 @@ export const FormContainer = () => {
             id="password"
             type={passwordVisible ? "text" : "password"}
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              if (passwordError) {
+                setPasswordError(false);
+              }
+            }}
             disabled={isPending}
             className={cn(
-              "border border-default rounded-lg h-12 pr-19 pl-3 bg-transparent text-lg relative",
+              fieldClassName,
+              "pr-19 pl-3",
               !passwordVisible && "tracking-[6px]",
             )}
           />
           <button
+            type="button"
             className="cursor-pointer absolute top-11 right-3 flex items-center gap-2 text-xs"
-            onClick={toggleVisible}
+            onClick={() => setPasswordVisible((visible) => !visible)}
           >
             {passwordVisible ? (
               <>
@@ -117,12 +106,7 @@ export const FormContainer = () => {
             )}
           </button>
           {passwordError && (
-            <div className="absolute -bottom-6 text-accent-error text-sm flex items-center gap-1">
-              <span className="text-inherit">
-                <CircleAlert size={16} />
-              </span>
-              Please enter your password
-            </div>
+            <FormErrorMessage>Please enter your password</FormErrorMessage>
           )}
         </div>
         <div className="flex flex-row w-full items-center justify-between gap-3 mb-4">
@@ -150,29 +134,26 @@ export const FormContainer = () => {
             Forgot password?
           </a>
         </div>
-        <div className="flex w-full">
-          <button
-            type="submit"
-            className="w-full bg-accent-brand-hot text-black py-2 px-8 text-lg flex items-center justify-center rounded-xl mb-4 cursor-pointer transition-bg duration-300 hover:bg-accent-brand"
-          >
-            Sign in
-          </button>
-        </div>
+        <button
+          type="submit"
+          disabled={isPending}
+          className="w-full bg-accent-brand-hot text-black py-2 px-8 text-lg flex items-center justify-center rounded-xl mb-4 cursor-pointer transition-bg duration-300 hover:bg-accent-brand disabled:opacity-60"
+        >
+          Sign in
+        </button>
       </form>
       <div className="flex items-center gap-2 mb-4">
-        <span className="flex-1 h-px bg-secondary/50"></span>
+        <span className="flex-1 h-px bg-secondary/50" />
         <p>or</p>
-        <span className="flex-1 h-px bg-secondary/50"></span>
+        <span className="flex-1 h-px bg-secondary/50" />
       </div>
-      <div className="flex w-full">
-        <a
-          href="#"
-          className="w-full cursor-pointer text-lg flex gap-2 items-center justify-center px-4 py-2 rounded-lg bg-transparent border border-default text-primary"
-        >
-          <ShieldCheck />
-          Sign in with SSO
-        </a>
-      </div>
+      <a
+        href="#"
+        className="w-full cursor-pointer text-lg flex gap-2 items-center justify-center px-4 py-2 rounded-lg bg-transparent border border-default text-primary"
+      >
+        <ShieldCheck />
+        Sign in with SSO
+      </a>
     </div>
   );
 };
