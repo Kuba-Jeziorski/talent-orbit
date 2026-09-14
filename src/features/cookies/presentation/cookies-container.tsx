@@ -30,7 +30,7 @@ export const CookiesContainer = () => {
   }
 
   return (
-    <div className="w-full max-w-lg mx-auto border border-default rounded-lg flex flex-col gap-4 p-6">
+    <div className="w-full max-w-lg mx-auto bg-surface border border-default rounded-lg flex flex-col gap-4 p-6">
       <div className="w-full flex justify-center items-center gap-2">
         <Cookie
           size={20}
