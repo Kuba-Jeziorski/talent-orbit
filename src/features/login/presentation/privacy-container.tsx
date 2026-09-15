@@ -1,6 +1,5 @@
 import type { PrivacyContainerProps } from "../domain/model";
 
-// TEST
 export const PrivacyContainer = ({ setStep }: PrivacyContainerProps) => {
   const handleStep = () => {
     setStep("form");
