@@ -9,6 +9,10 @@ import {
 } from "../../../constants/constants";
 import { getStoredConsent } from "../core/get-stored-consent";
 
+// TODO + TEST:
+// Privacy policy
+// Manage preferences
+
 type Consent =
   | typeof COOKIE_ACCEPT_LOCAL_STORAGE
   | typeof COOKIE_REJECT_LOCAL_STORAGE;
