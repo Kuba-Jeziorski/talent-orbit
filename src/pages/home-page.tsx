@@ -1,5 +1,6 @@
 import { useUser } from "../libs/auth/use-user";
 
+// TEST
 export const HomePage = () => {
   const { user } = useUser();
 

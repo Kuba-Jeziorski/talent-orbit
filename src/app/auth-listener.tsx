@@ -8,6 +8,7 @@ type Props = {
   children: ReactNode;
 };
 
+// TEST
 // Mounts with the app (first visit and refresh). Keeps ["user"] in sync
 // for the whole session; does not decide login vs home.
 export const AuthListener = ({ children }: Props) => {

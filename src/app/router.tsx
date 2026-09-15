@@ -7,6 +7,7 @@ import {
 import { queryClient } from "./query";
 import { HomeRoute, LoginRoute, RootLayout } from "./routes";
 
+// TEST
 // Reads the ["user"] cache filled by AuthListener (and by useLogin).
 const getCachedUser = () => queryClient.getQueryData(USER_QUERY_KEY);
 
