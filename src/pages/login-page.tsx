@@ -12,7 +12,6 @@ const FormContainer = lazy(() =>
   })),
 );
 
-// TEST
 export const LoginPage = () => {
   const [step, setStep] = useState<Step>("welcome");
 

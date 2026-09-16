@@ -26,7 +26,7 @@ describe("get session user", () => {
     } as never);
 
     // original getSessionUser function is called, but when await supabase.auth.getSession() is executed
-    // the mocked version (getSession) is hit and executed
+    // the mocked version (getSession) is hit
 
     // toMatchObject - must include; other keys are allowed
     await expect(getSessionUser()).resolves.toMatchObject({
