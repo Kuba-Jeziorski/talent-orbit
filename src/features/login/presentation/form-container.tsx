@@ -7,7 +7,6 @@ import { FormErrorMessage } from "./form-error-message";
 const fieldClassName =
   "border border-default rounded-lg h-12 bg-transparent text-lg relative";
 
-// TEST
 export const FormContainer = () => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(false);
