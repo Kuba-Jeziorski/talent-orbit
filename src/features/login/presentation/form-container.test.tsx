@@ -20,7 +20,6 @@ describe("form container", () => {
     cleanup();
   });
 
-  // TEST 1 - default render
   it("default render", () => {
     render(<FormContainer />);
     const heading = screen.getByText("Welcome back");
@@ -42,7 +41,6 @@ describe("form container", () => {
     ).not.toBeInTheDocument();
   });
 
-  // TEST 2 - submit with empty fields
   it("submit with empty fields", async () => {
     render(<FormContainer />);
     const submitButton = screen.getByRole("button", { name: "Sign in" });
@@ -54,7 +52,6 @@ describe("form container", () => {
     expect(login).not.toHaveBeenCalled();
   });
 
-  // TEST 3 - only one field filled
   it.each([
     {
       fill: "email",
@@ -91,7 +88,6 @@ describe("form container", () => {
     },
   );
 
-  // TEST 4 - valid submit
   it("valid submit calls login with email and password", async () => {
     render(<FormContainer />);
 
@@ -106,7 +102,6 @@ describe("form container", () => {
     );
   });
 
-  // TEST 5 - typing clears error field
   it("typing clears that field error", async () => {
     render(<FormContainer />);
 
@@ -126,7 +121,6 @@ describe("form container", () => {
     ).not.toBeInTheDocument();
   });
 
-  // TEST 6 - show/hide password
   it("toggles password visibility", async () => {
     render(<FormContainer />);
     const passwordInput = screen.getByLabelText("Password");
@@ -142,7 +136,6 @@ describe("form container", () => {
     expect(login).not.toHaveBeenCalled();
   });
 
-  // TEST 7 - isPending causing submit button and inputs disabled
   it("disables fields and submit while pending", () => {
     mockUseLogin.mockReturnValue({ login, isPending: true });
     render(<FormContainer />);
